@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Events\MessageSent;
 use App\Mesage;
+use App\User;
 
 class ChatsController extends Controller
 {
@@ -20,9 +21,14 @@ class ChatsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('chat');
+
+
+
+        $receiver = User::where('id', $request->get('id'))->first();
+
+        return view('chat', compact('receiver'));
     }
 
     /**
@@ -43,14 +49,24 @@ class ChatsController extends Controller
      */
     public function sendMessage(Request $request)
     {
+
+
         $user = Auth::user();
+        $receiver = $request->get('receiver');
+        $receiverId = $receiver['id'];
+
+        $receiverObj = User::where('id', $receiverId)->first();
 
         $message = $user->messages()->create([
-            'message' => $request->input('message')
+            'message' => $request->input('message'), 
+            'receiver_id'=>(int)$request->input('receiver_id')
+
         ]);
 
-        broadcast(new MessageSent($user, $message))->toOthers();
 
-        return ['status' => 'Message Sent!'];
+
+        broadcast(new MessageSent($user, $message, $receiverObj))->toOthers();
+
+        return ['status' => 'Message sent!'];
     }
 }

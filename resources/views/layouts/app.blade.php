@@ -115,6 +115,11 @@
     </div>
 
     <!-- Scripts -->
+
+    <script>
+        window.user_id = "{{\Illuminate\Support\Facades\Auth::user()->first()->id}}";
+        window.receiver_id="{{$_GET['id']}}";
+    </script>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

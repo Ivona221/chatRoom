@@ -7,6 +7,7 @@
 
 require('./bootstrap');
 
+
 window.Vue = require('vue');
 
 /**
@@ -19,20 +20,38 @@ Vue.component('example', require('./components/Example.vue'));
 Vue.component('chat-messages', require('./components/ChatMessages.vue'));
 Vue.component('chat-form', require('./components/ChatForm.vue'));
 
+
+
+
 const app = new Vue({
     el: '#app',
 
+    user_id: window.user_id,
+
+    receiver_id: window.receiver_id,
+
     data: {
-        messages: []
+        messages: [],
+
     },
+
+
 
     created() {
         this.fetchMessages();
-        Echo.private('chat')
-            .listen('MessageSent', (e) => {
+        let ids = [user_id,receiver_id];
+        ids = ids.sort();
+        ids = ids.join('-');
+
+
+
+
+        Echo.private('chat' + ids)
+            .listen('MessageSent' , (e) => {
                 this.messages.push({
-                    message: e.message.message,
-                    user: e.user
+                     message: e.message.message,
+                     user: e.user,
+                     receiver: e.receiver
                 });
             });
     },
@@ -50,6 +69,8 @@ const app = new Vue({
             axios.post('/messages', message).then(response => {
                 console.log(response.data);
             });
-        }
+        },
+
+
     }
 });

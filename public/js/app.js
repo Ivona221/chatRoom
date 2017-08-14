@@ -901,18 +901,28 @@ Vue.component('chat-form', __webpack_require__(45));
 var app = new Vue({
     el: '#app',
 
+    user_id: window.user_id,
+
+    receiver_id: window.receiver_id,
+
     data: {
         messages: []
+
     },
 
     created: function created() {
         var _this = this;
 
         this.fetchMessages();
-        Echo.private('chat').listen('MessageSent', function (e) {
+        var ids = [user_id, receiver_id];
+        ids = ids.sort();
+        ids = ids.join('-');
+
+        Echo.private('chat' + ids).listen('MessageSent', function (e) {
             _this.messages.push({
                 message: e.message.message,
-                user: e.user
+                user: e.user,
+                receiver: e.receiver
             });
         });
     },
@@ -46863,7 +46873,7 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "C:\\Users\\User\\chatRoom\\resources\\assets\\js\\components\\Example.vue"
+Component.options.__file = "/home/imi/chat-room/chatRoom/resources/assets/js/components/Example.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46961,7 +46971,7 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "C:\\Users\\User\\chatRoom\\resources\\assets\\js\\components\\ChatMessages.vue"
+Component.options.__file = "/home/imi/chat-room/chatRoom/resources/assets/js/components/ChatMessages.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ChatMessages.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -47056,7 +47066,7 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "C:\\Users\\User\\chatRoom\\resources\\assets\\js\\components\\ChatForm.vue"
+Component.options.__file = "/home/imi/chat-room/chatRoom/resources/assets/js/components/ChatForm.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ChatForm.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -47097,13 +47107,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user'],
+    props: ['user', 'receiver', 'users'],
 
     data: function data() {
         return {
             newMessage: ''
+
         };
     },
 
@@ -47112,10 +47134,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         sendMessage: function sendMessage() {
             this.$emit('messagesent', {
                 user: this.user,
-                message: this.newMessage
+                message: this.newMessage,
+                receiver: this.receiver,
+                users: this.users
             });
-
             this.newMessage = '';
+        },
+        redirect: function redirect(id) {
+
+            window.location.href = 'http://127.0.0.1:8000/chat?id=' + id;
         }
     }
 });
@@ -47164,7 +47191,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.sendMessage
     }
-  }, [_vm._v("\n            Send\n        ")])])])
+  }, [_vm._v("\n            Send\n        ")])]), _vm._v(" "), _c('ul', _vm._l((_vm.users), function(user) {
+    return _c('button', {
+      on: {
+        "click": function($event) {
+          _vm.redirect(user.id)
+        }
+      }
+    }, [_vm._v("\n            " + _vm._s(user.name) + "\n        ")])
+  }))])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

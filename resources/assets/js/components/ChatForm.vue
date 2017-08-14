@@ -7,16 +7,28 @@
                 Send
             </button>
         </span>
+
+        <ul>
+            <button @click="redirect(user.id)" v-for="user in users">
+                {{ user.name }}
+            </button>
+        </ul>
+
+
+
     </div>
 </template>
 
+
+
 <script>
     export default {
-        props: ['user'],
+        props: ['user', 'receiver','users'],
 
         data() {
             return {
-                newMessage: ''
+                newMessage: '',
+
             }
         },
 
@@ -24,11 +36,21 @@
             sendMessage() {
                 this.$emit('messagesent', {
                     user: this.user,
-                    message: this.newMessage
+                    message: this.newMessage,
+                    receiver: this.receiver,
+                    users:this.users
                 });
-
                 this.newMessage = ''
+
+            },
+
+            redirect(id){
+
+                window.location.href = 'http://127.0.0.1:8000/chat?id='+id;
             }
         }
     }
+
+
+
 </script>
