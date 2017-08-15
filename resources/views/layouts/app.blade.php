@@ -117,8 +117,13 @@
     <!-- Scripts -->
 
     <script>
-        window.user_id = "{{\Illuminate\Support\Facades\Auth::user()->first()->id}}";
-        window.receiver_id="{{$_GET['id']}}";
+        $url = $_SERVER['REQUEST_URI'];
+        window.user_id = '{{\Illuminate\Support\Facades\Auth::user()->first()->id}}';
+
+        if(isset($url['id'])) {
+            window.receiver_id = "{{$url['id']}}";
+        }
+
     </script>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

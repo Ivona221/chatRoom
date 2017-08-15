@@ -1,22 +1,27 @@
 <template>
-    <div class="input-group">
+    <div>
         <input id="btn-input" type="text" name="message" class="form-control input-sm" placeholder="Type your message here..." v-model="newMessage" @keyup.enter="sendMessage">
-
+        <br>
         <span class="input-group-btn">
             <button class="btn btn-primary btn-sm" id="btn-chat" @click="sendMessage">
                 Send
             </button>
-        </span>
 
-        <ul>
+
+        </span >
+        <br>
+        <div class="btn-group">
+
             <button @click="redirect(user.id)" v-for="user in users">
                 {{ user.name }}
             </button>
-        </ul>
 
-
-
+        </div>
     </div>
+
+
+
+
 </template>
 
 
@@ -40,7 +45,8 @@
                     user: this.user,
                     message: this.newMessage,
                     receiver: this.receiver,
-                    users:this.users
+                    users:this.users,
+
                 });
                 this.newMessage = ''
 

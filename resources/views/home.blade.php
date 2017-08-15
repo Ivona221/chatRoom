@@ -10,6 +10,8 @@
                 <div class="panel-body">
                     You are logged in!
 
+                    <a href="/chat?id="+{{Auth::user()->id}}>Go to Chat Room</a>
+
                 </div>
             </div>
         </div>

@@ -24,7 +24,7 @@ Broadcast::channel('chat', function ($user) {
 
 
 Broadcast::channel('chat{id}', function ($user, $id) {
-    if(User::where('id',$user->id)&&User::where('id',$id)){
+    if(User::where('id',$user->id)&&(User::where('id',explode('-',$id)[0])||User::where('id',explode('-',$id)[1]))){
         return true;
     }
     else

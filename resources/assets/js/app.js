@@ -8,6 +8,7 @@
 require('./bootstrap');
 
 
+
 window.Vue = require('vue');
 
 /**
@@ -25,9 +26,7 @@ Vue.component('chat-form', require('./components/ChatForm.vue'));
 
 const app = new Vue({
     el: '#app',
-
     user_id: window.user_id,
-
     receiver_id: window.receiver_id,
 
     data: {
@@ -42,9 +41,6 @@ const app = new Vue({
         let ids = [user_id,receiver_id];
         ids = ids.sort();
         ids = ids.join('-');
-
-
-
 
         Echo.private('chat' + ids)
             .listen('MessageSent' , (e) => {
@@ -65,6 +61,7 @@ const app = new Vue({
 
         addMessage(message) {
             this.messages.push(message);
+
 
             axios.post('/messages', message).then(response => {
                 console.log(response.data);

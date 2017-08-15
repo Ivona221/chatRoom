@@ -23,9 +23,6 @@ class ChatsController extends Controller
      */
     public function index(Request $request)
     {
-
-
-
         $receiver = User::where('id', $request->get('id'))->first();
 
         return view('chat', compact('receiver'));
@@ -38,7 +35,7 @@ class ChatsController extends Controller
      */
     public function fetchMessages()
     {
-        return Mesage::with('user')->get();
+        return Mesage::with('user')->where('receiver_id',Auth::user()->id )->orWhere('user_id',Auth::user()->id)->get();
     }
 
     /**
@@ -59,7 +56,7 @@ class ChatsController extends Controller
 
         $message = $user->messages()->create([
             'message' => $request->input('message'), 
-            'receiver_id'=>(int)$request->input('receiver_id')
+            'receiver_id'=>$receiverId
 
         ]);
 

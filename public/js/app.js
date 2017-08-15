@@ -900,9 +900,7 @@ Vue.component('chat-form', __webpack_require__(45));
 
 var app = new Vue({
     el: '#app',
-
     user_id: window.user_id,
-
     receiver_id: window.receiver_id,
 
     data: {
@@ -46873,7 +46871,7 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/imi/chat-room/chatRoom/resources/assets/js/components/Example.vue"
+Component.options.__file = "C:\\Users\\User\\chatRoom\\resources\\assets\\js\\components\\Example.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46971,7 +46969,7 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/imi/chat-room/chatRoom/resources/assets/js/components/ChatMessages.vue"
+Component.options.__file = "C:\\Users\\User\\chatRoom\\resources\\assets\\js\\components\\ChatMessages.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ChatMessages.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -47066,7 +47064,7 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/imi/chat-room/chatRoom/resources/assets/js/components/ChatForm.vue"
+Component.options.__file = "C:\\Users\\User\\chatRoom\\resources\\assets\\js\\components\\ChatForm.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ChatForm.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -47118,6 +47116,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['user', 'receiver', 'users'],
@@ -47137,6 +47142,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 message: this.newMessage,
                 receiver: this.receiver,
                 users: this.users
+
             });
             this.newMessage = '';
         },
@@ -47152,9 +47158,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "input-group"
-  }, [_c('input', {
+  return _c('div', [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -47181,7 +47185,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.newMessage = $event.target.value
       }
     }
-  }), _vm._v(" "), _c('span', {
+  }), _vm._v(" "), _c('br'), _vm._v(" "), _c('span', {
     staticClass: "input-group-btn"
   }, [_c('button', {
     staticClass: "btn btn-primary btn-sm",
@@ -47191,7 +47195,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.sendMessage
     }
-  }, [_vm._v("\n            Send\n        ")])]), _vm._v(" "), _c('ul', _vm._l((_vm.users), function(user) {
+  }, [_vm._v("\n            Send\n        ")])]), _vm._v(" "), _c('br'), _vm._v(" "), _c('div', {
+    staticClass: "btn-group"
+  }, _vm._l((_vm.users), function(user) {
     return _c('button', {
       on: {
         "click": function($event) {
