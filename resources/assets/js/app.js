@@ -42,6 +42,7 @@ const app = new Vue({
         ids = ids.sort();
         ids = ids.join('-');
 
+
         Echo.private('chat' + ids)
             .listen('MessageSent' , (e) => {
                 this.messages.push({
@@ -50,6 +51,8 @@ const app = new Vue({
                      receiver: e.receiver
                 });
             });
+
+
     },
 
     methods: {

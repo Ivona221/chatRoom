@@ -3,8 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\View\View;
+
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +17,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
+        if(Auth::check()){
+            $id=Auth::user()->id;
+        }
+        else
+            $id=0;
+        View::share('id', $id);
 
     }
 

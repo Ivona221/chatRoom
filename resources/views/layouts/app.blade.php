@@ -117,12 +117,14 @@
     <!-- Scripts -->
 
     <script>
-        $url = $_SERVER['REQUEST_URI'];
-        window.user_id = '{{\Illuminate\Support\Facades\Auth::user()->first()->id}}';
 
-        if(isset($url['id'])) {
-            window.receiver_id = "{{$url['id']}}";
+        @if(Auth::check())
+        window.user_id = '{{Auth::user()->id}}';
+@endif
+        @if(isset($_GET["id"])) {
+            window.receiver_id = "{{$_GET['id']}}";
         }
+        @endif
 
     </script>
     <script src="{{ asset('js/app.js') }}"></script>

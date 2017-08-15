@@ -64,6 +64,7 @@ class ChatsController extends Controller
 
         broadcast(new MessageSent($user, $message, $receiverObj))->toOthers();
 
+
         return ['status' => 'Message sent!'];
     }
 }
